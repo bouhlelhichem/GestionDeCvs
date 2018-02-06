@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+<h:outputStylesheet library="css" name="style.css" />
+</head>
+<ui:composition>
+
+	<c:set var="u" value="#{auth.authPerson}" />
+	<div id="header">
+		<div id="header1">
+			<h:form>
+				<div id="search">
+
+					<p:panelGrid styleClass="searchBar">
+						<h:outputText value="Titre d'activité:"
+							style="font-size: 28px; width:186px;" />
+						<p:inputText id="title" value="#{person.title}" required="true"
+							requiredMessage="Recherche impossible : Champ vide" />
+						<p:commandButton action="#{person.findByTitle()}" value="Chercher"
+							icon="ui-icon-search" />
+						<p:message for="title" />
+					</p:panelGrid>
+				</div>
+			</h:form>
+
+		</div>
+
+		<div id="header2">
+
+			<h:form>
+				<c:choose>
+					<c:when test="${u.id eq null}">
+						<div id="login">
+							<p:panelGrid id="panelGrid" border="0" columns="4"
+								cellpadding="5" styleClass="loginGrid">
+
+								<p:message for="email" />
+								<h:outputLabel for="email" value="Email:" />
+								<p:inputText id="email" value="#{auth.email}" />
+								<p />
+
+								<p:message for="password" />
+								<h:outputLabel for="password" value="Mot de passe:" />
+								<p:password id="password" value="#{auth.password}" />
+								<p:commandButton action="#{auth.authentification()}"
+									value="Connexion" icon="ui-icon-check" ajax="false" />
+							</p:panelGrid>
+
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div id="logout">
+							<p:panelGrid columns="1" cellpadding="5" styleClass="logoutGrid">
+
+								<p:outputLabel value="Bonjour, #{u.firstName} #{u.name}" />
+
+								<p:commandButton action="#{auth.leave()}" value="Déconnexion"
+									validateClient="true" update="msgs" ajax="false"
+									icon="ui-icon-closethick" />
+
+							</p:panelGrid>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</h:form>
+
+		</div>
+
+	</div>
+</ui:composition>
+
+</html>

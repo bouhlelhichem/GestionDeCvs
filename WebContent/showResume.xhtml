@@ -1,0 +1,188 @@
+<!-- <html xmlns="http://www.w3.org/1999/xhtml" -->
+<!-- 	xmlns:h="http://java.sun.com/jsf/html" -->
+<!-- 	xmlns:f="http://java.sun.com/jsf/core" -->
+<!-- 	xmlns:ui="http://java.sun.com/jsf/facelets" -->
+<!-- 	xmlns:c="http://java.sun.com/jsp/jstl/core"> -->
+
+<!-- <h:head> -->
+<!-- </h:head> -->
+<!-- <h:outputStylesheet library="css" name="style.css" /> -->
+<!-- <ui:composition template="resources/template/mylayout.xhtml"> -->
+<!-- 	<ui:define name="content"> -->
+
+<!-- 				<h:form id="form"> -->
+
+
+<!-- 					<h:outputText value="Nom:" /> -->
+<!-- 					<h:outputText value="#{person.thePerson.name}" /> -->
+
+<!-- 					<h:outputText value="Prenom:" /> -->
+<!-- 					<h:outputText value="#{person.thePerson.firstName}" /> -->
+
+<!-- 					<h:outputText value="Date de naissance:" /> -->
+<!-- 					<h:outputText value="#{person.thePerson.birthday}" /> -->
+
+<!-- 					<h:outputText value="Site Web:" /> -->
+<!-- 					<h:outputText value="#{person.thePerson.webAddress}" /> -->
+
+
+
+<!-- 					<ui:repeat var="a" value="#{auth.activities}"> -->
+<!-- 						<h:panelGrid columns="2" cellpadding="5"> -->
+<!-- 							<h:outputText value="Nature:" /> -->
+<!-- 							<h:outputText value="#{a.nature}" /> -->
+
+<!-- 							<h:outputText value="Titre:" /> -->
+<!-- 							<h:outputText value="#{a.title}" /> -->
+
+<!-- 							<h:outputText value="Annee:" /> -->
+<!-- 							<h:outputText value="#{a.year}" /> -->
+
+<!-- 							<h:outputText value="Description:" /> -->
+<!-- 							<h:outputText value="#{a.description}" /> -->
+
+<!-- 							<h:outputText value="Adresse web" /> -->
+<!-- 							<h:outputText value="#{a.webAddress}" /> -->
+
+<!-- 						</h:panelGrid> -->
+<!-- 					</ui:repeat> -->
+
+<!-- 				</h:form> -->
+
+
+
+<!-- 	</ui:define> -->
+<!-- </ui:composition> -->
+
+<!-- </html> -->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:outputStylesheet library="css" name="style.css" />
+<h:outputStylesheet library="css" name="theme.css" />
+<ui:composition template="/template/mylayout.xhtml">
+	<ui:define name="content">
+
+		<c:choose>
+			<c:when test="${ empty person.thePerson.id}">
+				<h:outputText value="Aucune personne selectionnée" />
+			</c:when>
+			<c:otherwise>
+				<h:form id="form">
+
+					<p:panelGrid columns="2" style="border:solid 2px white">
+						<h:outputText value="Nom:" />
+						<h:outputText value="#{person.thePerson.name}" />
+
+						<h:outputText style="border:solid 2px white" value="Prenom:" />
+						<h:outputText value="#{person.thePerson.firstName}" />
+
+						<h:outputText style="border:solid 2px white"
+							value="Date de naissance:" />
+						<h:outputText style="border:solid 2px white"
+							value="#{person.thePerson.birthday}" />
+
+						<h:outputText value="Adresse mail:" />
+						<h:outputText value="#{person.thePerson.email}" />
+
+						<h:outputText value="Site Web:" />
+						<h:outputText value="#{person.thePerson.webAddress}" />
+					</p:panelGrid>
+					<!-- Les activités -->
+
+					<p:tabView dynamic="true" cache="true">
+						<p:tab title="Formation">
+							<c:forEach var="a" items="#{person.activities}">
+								<c:choose>
+									<c:when test="#{a.nature == 'FORMATION'}">
+										<p:outputPanel>
+											<p:panelGrid columns="2" cellpadding="5"
+												style="border:solid 2px white">
+
+												<h:outputText value="Titre:" />
+												<h:outputText value="#{a.title}" />
+
+												<h:outputText value="Annee:" />
+												<h:outputText value="#{a.year}" />
+
+												<h:outputText value="Adresse web" />
+												<h:outputText value="#{a.webAddress}" />
+
+												<h:outputText value="Description:" />
+												<h:outputText value="#{a.description}" />
+
+											</p:panelGrid>
+										</p:outputPanel>
+									</c:when>
+								</c:choose>
+							</c:forEach>
+						</p:tab>
+						<p:tab title="Experience professionnnelle">
+							<c:forEach var="a" items="#{person.activities}">
+								<c:choose>
+									<c:when test="#{a.nature == 'EXPERIENCE_PROFESSIONNELLE'}">
+										<p:outputPanel>
+											<p:panelGrid columns="2" cellpadding="5"
+												style="border:solid 2px white">
+
+												<h:outputText value="Titre:" />
+												<h:outputText value="#{a.title}" />
+
+												<h:outputText value="Annee:" />
+												<h:outputText value="#{a.year}" />
+
+												<h:outputText value="Adresse web" />
+												<h:outputText value="#{a.webAddress}" />
+
+												<h:outputText value="Description:" />
+												<h:outputText value="#{a.description}" />
+
+											</p:panelGrid>
+										</p:outputPanel>
+									</c:when>
+								</c:choose>
+							</c:forEach>
+						</p:tab>
+						<p:tab title="Autre">
+							<c:forEach var="a" items="#{person.activities}">
+								<c:choose>
+									<c:when test="#{a.nature == 'AUTRE'}">
+										<p:outputPanel>
+											<p:panelGrid columns="2" cellpadding="5"
+												style="border:solid 2px white">
+
+												<h:outputText value="Titre:" />
+												<h:outputText value="#{a.title}" />
+
+												<h:outputText value="Annee:" />
+												<h:outputText value="#{a.year}" />
+
+												<h:outputText value="Adresse web" />
+												<h:outputText value="#{a.webAddress}" />
+
+												<h:outputText value="Description:" />
+												<h:outputText value="#{a.description}" />
+
+											</p:panelGrid>
+										</p:outputPanel>
+									</c:when>
+								</c:choose>
+							</c:forEach>
+						</p:tab>
+
+					</p:tabView>
+				</h:form>
+			</c:otherwise>
+		</c:choose>
+
+	</ui:define>
+</ui:composition>
+
+</html>

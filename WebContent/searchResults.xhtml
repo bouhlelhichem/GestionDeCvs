@@ -1,0 +1,83 @@
+<!-- <html xmlns="http://www.w3.org/1999/xhtml" -->
+<!-- 	xmlns:h="http://java.sun.com/jsf/html" -->
+<!-- 	xmlns:f="http://java.sun.com/jsf/core" -->
+<!-- 	xmlns:ui="http://java.sun.com/jsf/facelets" -->
+<!-- 	xmlns:p="http://primefaces.org/ui" -->
+<!-- 	xmlns:c="http://java.sun.com/jsp/jstl/core"> -->
+
+<!-- <h:head> -->
+<!-- </h:head> -->
+<!-- <h:body> -->
+<!-- 	<h:outputStylesheet library="css" name="style.css" /> -->
+<!-- 	<ui:composition template="resources/template/mylayout.xhtml"> -->
+<!-- 		<ui:define name="content"> -->
+<!-- 			<p:layoutUnit id="content" position="center"> -->
+<!-- 				<h:form> -->
+<!-- 					<p:panel header="Resultat de la recherche "> -->
+
+<!-- 						<ui:repeat var="a" value="#{person.findedPersons}"> -->
+<!-- 							<h:panelGrid columns="2" cellpadding="5"> -->
+
+<!-- 								<h:outputText value="nom: " /> -->
+
+<!-- 								<h:commandLink -->
+<!--                                         action="#{person.showResume(a)}" -->
+<!--                                         value="#{a.name} #{a.firstName}" /> -->
+
+<!-- 							</h:panelGrid> -->
+<!-- 						</ui:repeat> -->
+<!-- 					</p:panel> -->
+<!-- 				</h:form> -->
+<!-- 			</p:layoutUnit> -->
+<!-- 		</ui:define> -->
+<!-- 	</ui:composition> -->
+
+<!-- </h:body> -->
+<!-- </html> -->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+</h:head>
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	<ui:composition template="/template/mylayout.xhtml">
+		<ui:define name="content">
+			<p:layoutUnit id="content" position="center">
+				<h:form>
+					<p:dataTable var="a" value="#{person.findedPersons}"
+						paginator="true"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15"
+						rows="10">
+
+						<f:facet name="header">
+            				Résultats
+        					</f:facet>
+
+						<p:column headerText="Prénom">
+							<h:outputText value="#{a.firstName}" />
+						</p:column>
+
+						<p:column headerText="Nom">
+							<h:outputText value="#{a.name}" />
+						</p:column>
+
+						<p:column style="width:186px;text-align: center">
+							<p:commandButton icon="ui-icon-search" title="CV" value="Afficher le CV"
+								action="#{person.showResume(a)}" />
+						</p:column>
+
+					</p:dataTable>
+				</h:form>
+			</p:layoutUnit>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>

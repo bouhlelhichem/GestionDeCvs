@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources>
+
+<!-- <Resource id="myTestDataSource" type="javax.sql.DataSource"> -->
+<!--     JdbcDriver org.hsqldb.jdbcDriver -->
+<!--     JdbcUrl jdbc:hsqldb:file:/tmp/ma-bd -->
+<!--     UserName sa -->
+<!--     Password -->
+<!--     jtaManaged true -->
+<!-- </Resource> -->
+
+
+<Resource id = "myTestDataSource" type="DataSource">
+JdbcDriver com.mysql.jdbc.Driver
+JdbcUrl jdbc:mysql://phpmyadmin.luminy.univ-amu.fr/b15013157
+UserName b15013157
+Password Arsenal08*
+JtaManaged false
+</Resource>
+</resources>

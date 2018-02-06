@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/template/mylayout.xhtml">
+<ui:define name="content">
+    <f:view>
+        <h1>Course edition</h1>
+        <h:form id="test">
+            <c:set var="c" value="#{course.theCourse}" />
+            <table border="1">
+                <tr>
+                    <td><h:outputText value="Name :" /></td>
+                    <td><h:inputText id="name" value="#{c.name}" />
+                    <h:message style="color:red" for="name" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Hours :" /></td>
+                    <td><h:inputText id="hours" value="#{c.hours}" />
+                    <h:message style="color:red" for="hours" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Description :" /></td>
+                    <td>
+                        <h:inputTextarea id="description"
+                            value="#{c.description}" cols="50" rows="10" />
+                        <h:message style="color:red" for="description" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <h:commandButton
+                            action="#{course.save()}" value="Save" /> | 
+                        <h:link outcome="courses" value="List of courses" />
+                    </td>
+                </tr>
+            </table>
+        </h:form>
+    </f:view>
+</ui:define>
+</ui:composition>
+</html>

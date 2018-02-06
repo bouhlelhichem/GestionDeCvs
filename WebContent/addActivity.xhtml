@@ -1,0 +1,74 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<title>Modifier l'activité</title>
+	<style type="text/css">
+.ui-widget {
+	font-size: 90%;
+}
+</style>
+</h:head>
+
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	<ui:composition template="/template/mylayout.xhtml">
+		<ui:define name="content">
+
+			<h:form id="form">
+				<p:panel>
+					<c:set var="activityValidator" value="#{auth.validateActivity}" />
+					<p:panelGrid columns="3" cellpadding="5">
+						<h:outputLabel for="nature" value="Nature:" />
+						<p:selectOneMenu id="nature" value="#{activityValidator.nature}">
+							<f:selectItems value="#{auth.nature}" />
+						</p:selectOneMenu>
+						<p:message for="nature" />
+						<h:outputLabel for="title" value="Titre:" />
+						<p:inputText id="title" value="#{activityValidator.title}"
+							label="Titre" />
+						<p:message for="title" />
+
+						<h:outputLabel for="year" value="Année:" />
+						<p:calendar id="year" locale="fr" navigator="true"
+							pattern="dd-MM-yyyy" mask="true" yearRange="c-50:c+50"
+							value="#{activityValidator.year}" />
+						<p:message for="year" />
+
+
+						<h:outputLabel for="description" value="Description:" />
+						<p:inputTextarea id="description" rows="6" cols="33"
+							value="#{activityValidator.description}" label="Description" />
+						<p:message for="description" />
+
+						<h:outputLabel for="webAdress" value="Addresse Web" />
+						<p:inputText id="webAddress"
+							value="#{activityValidator.webAddress}" label="Adresse web" />
+						<p:message for="webAddress" />
+
+					</p:panelGrid>
+					<p:commandButton action="#{auth.addActivity()}"
+						value="Enregister les modifications" icon="ui-icon-check"
+						ajax="false">
+					</p:commandButton>
+
+				</p:panel>
+				<p:dialog modal="
+				true" resizable="false" header="Values"
+					widgetVar="dlg" showEffect="fold">
+					<p:panelGrid id="display" columns="2" columnClasses="label,value">
+						<h:outputText value="Année:" />
+						<h:outputText value="#{activityValidator.year}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:panelGrid>
+				</p:dialog>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

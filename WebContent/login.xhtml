@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	<ui:composition template="/template/mylayout.xhtml">
+		<ui:define name="content">
+			<p:layoutUnit id="content" position="center">
+
+				<h:form>
+					<c:set var="u" value="#{auth.authPerson}" />
+
+					<p:panel header="Connexion">
+
+						<h:panelGrid columns="3" cellpadding="5">
+
+							<h:outputLabel for="email" value="Email:" />
+							<p:inputText id="email" value="#{auth.email}" />
+							<p:message for="email" />
+
+							<h:outputLabel for="password" value="Mot de passe:" />
+							<p:password id="password" value="#{auth.password}" />
+							<p:message for="password" />
+
+						</h:panelGrid>
+						<p:message for="msg" />
+						<!-- 						<p:commandButton -->
+						<!-- 							action="#{auth.authentification()}" -->
+						<!-- 							value="Connexion" icon="ui-icon-check" ajax="false" /> -->
+
+					</p:panel>
+				</h:form>
+			</p:layoutUnit>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>

@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+</h:head>
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+<ui:composition template="/template/mylayout.xhtml">
+		<ui:define name="content">
+			<p:layoutUnit id="content" position="center">
+
+				<c:set var="personValidator" value="#{auth.validatePerson}" />
+
+				<h:form>
+<!-- 					<p:growl id="msgs" showDetail="true" /> -->
+
+					<p:panel header="Formulaire ">
+
+						<p:panelGrid columns="3" cellpadding="5">
+							<h:outputLabel for="name" value="Nom:" />
+							<p:inputText id="name" value="#{personValidator.name}"
+								label="Nom: " required="true" requiredMessage="Veuillez saisir un nom"/>
+							<p:message for="name" />
+
+							<h:outputLabel for="firstName" value="Prénom:" />
+							<p:inputText id="firstName" value="#{personValidator.firstName}"
+								label="Prénom" required="true" requiredMessage="Veuillez saisir un prenom"/>
+							<p:message for="firstName" />
+
+							<p:outputLabel for="birthday" value="Date de naissance:" />
+							<p:calendar id="birthday" value="#{personValidator.birthday}" yearRange="c-50:c+50"
+								locale="fr" navigator="true" pattern="dd-MM-yyyy" mask="true"/>
+							<p:message for="birthday" />
+
+							<h:outputLabel for="email" value="Email:" />
+							<p:inputText id="email" value="#{personValidator.email}"
+								label="Email" required="true" requiredMessage="Veuillez saisir une adresse mail" />
+							<p:message for="email" />
+
+							<h:outputLabel for="web" value="Site web:" />
+							<p:inputText id="web" value="#{personValidator.webAddress}"
+								label="Site web" required="true" requiredMessage="Veuillez saisir une adresse Web"/>
+							<p:message for="web" />
+
+
+						</p:panelGrid>
+
+						<p:commandButton 
+							action="#{auth.updatePerson()}" value="modifier" ajax="false"
+							icon="ui-icon-check" validateClient="true" update="msgs" />
+
+					</p:panel>
+<!-- 					<p:dialog modal="true" resizable="false" header="Values" -->
+<!-- 						widgetVar="dlg" showEffect="fold"> -->
+<!-- 						<p:panelGrid id="display" columns="2" columnClasses="label,value"> -->
+<!-- 							<h:outputText value="Date de naissance:" /> -->
+<!-- 							<h:outputText value="#{personValidator.birthday}"> -->
+<!-- 								<f:convertDateTime pattern="dd/MM/yyyy" /> -->
+<!-- 							</h:outputText> -->
+<!-- 						</p:panelGrid> -->
+<!-- 					</p:dialog> -->
+				</h:form>
+			</p:layoutUnit>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>

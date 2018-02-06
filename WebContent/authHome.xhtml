@@ -1,0 +1,140 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+</h:head>
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	<ui:composition template="/template/mylayout.xhtml">
+		<ui:define name="content">
+			<c:set var="u" value="#{auth.authPerson}" />
+			<h:form id="form">
+
+				<p:panelGrid columns="2" styleClass="panGrid" >
+					<h:outputText value="Nom:" />
+					<h:outputText value="#{u.name}" />
+
+					<h:outputText style="border:solid 2px white" value="Prenom:" />
+					<h:outputText value="#{u.firstName}" />
+
+					<h:outputText style="border:solid 2px white"
+						value="Date de naissance:" />
+					<h:outputText style="border:solid 2px white" value="#{u.birthday}" />
+
+					<h:outputText value="Adresse mail:" />
+					<h:outputText value="#{u.email}" />
+
+					<h:outputText value="Site Web:" />
+					<h:outputText value="#{u.webAddress}" />
+				</p:panelGrid>
+				<!-- Les activités -->
+
+				<p:tabView dynamic="true" cache="true">
+					<p:tab title="Formation">
+						<c:forEach var="a" items="#{auth.activities}">
+							<c:choose>
+								<c:when test="#{a.nature == 'FORMATION'}">
+									<p:outputPanel>
+										<p:panelGrid columns="2" cellpadding="5">
+
+											<h:outputText value="Titre:" />
+											<h:outputText value="#{a.title}" />
+
+											<h:outputText value="Annee:" />
+											<h:outputText value="#{a.year}" />
+
+											<h:outputText value="Adresse web" />
+											<h:outputText value="#{a.webAddress}" />
+
+											<h:outputText value="Description:" />
+											<h:outputText value="#{a.description}" />
+
+											<p:commandButton action="#{auth.chargeActivity(a)}"
+												value="modifier" validateClient="true" update="msgs"
+												ajax="false" />
+											<p:commandButton action="#{auth.deleteActivity(a)}"
+												value="supprimer" validateClient="true" update="msgs"
+												ajax="false" />
+
+										</p:panelGrid>
+									</p:outputPanel>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+					</p:tab>
+					<p:tab title="Experience professionnnelle">
+						<c:forEach var="a" items="#{auth.activities}">
+							<c:choose>
+								<c:when test="#{a.nature == 'EXPERIENCE_PROFESSIONNELLE'}">
+									<p:outputPanel>
+										<p:panelGrid columns="2" cellpadding="5">
+
+											<h:outputText value="Titre:" />
+											<h:outputText value="#{a.title}" />
+
+											<h:outputText value="Annee:" />
+											<h:outputText value="#{a.year}" />
+
+											<h:outputText value="Adresse web" />
+											<h:outputText value="#{a.webAddress}" />
+
+											<h:outputText value="Description:" />
+											<h:outputText value="#{a.description}" />
+
+											<p:commandButton action="#{auth.chargeActivity(a)}"
+												value="modifier" validateClient="true" update="msgs"
+												ajax="false" />
+											<p:commandButton action="#{auth.deleteActivity(a)}"
+												value="supprimer" validateClient="true" update="msgs"
+												ajax="false" />
+
+										</p:panelGrid>
+									</p:outputPanel>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+					</p:tab>
+					<p:tab title="Autre">
+						<c:forEach var="a" items="#{auth.activities}">
+							<c:choose>
+								<c:when test="#{a.nature == 'AUTRE'}">
+									<p:outputPanel>
+										<p:panelGrid columns="2" cellpadding="5">
+
+											<h:outputText value="Titre:" />
+											<h:outputText value="#{a.title}" />
+
+											<h:outputText value="Annee:" />
+											<h:outputText value="#{a.year}" />
+
+											<h:outputText value="Adresse web" />
+											<h:outputText value="#{a.webAddress}" />
+
+											<h:outputText value="Description:" />
+											<h:outputText value="#{a.description}" />
+
+											<p:commandButton action="#{auth.chargeActivity(a)}"
+												value="modifier" validateClient="true" update="msgs"
+												ajax="false" />
+											<p:commandButton action="#{auth.deleteActivity(a)}"
+												value="supprimer" validateClient="true" update="msgs"
+												ajax="false" />
+										</p:panelGrid>
+									</p:outputPanel>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+					</p:tab>
+
+				</p:tabView>
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>

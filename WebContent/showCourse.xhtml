@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/template/mylayout.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<p>
+				<h:commandLink action="editCourse">Modifier</h:commandLink>
+			</p>
+		</h:form>
+		<f:view>
+			<c:set var="c" value="#{course.theCourse}" />
+			<h1>Course #{c.name}</h1>
+			<p>Id: #{c.id}</p>
+			<p>Name: #{c.name}</p>
+			<p>Hours: #{c.hours}</p>
+			<p>Description: #{c.description}</p>
+			<p>
+				<h:link outcome="courses">List of courses</h:link>
+			</p>
+		</f:view>
+	</ui:define>
+</ui:composition>
+
+</html>

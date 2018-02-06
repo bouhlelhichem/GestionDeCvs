@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	<ui:composition template="/template/mylayout.xhtml">
+		<ui:define name="content">
+			<p:layoutUnit id="content" position="center">
+				<h:form>
+					<p:panel header="Recherche de CVs ">
+					<h3>Filtrer par :</h3>
+					<h:panelGrid columns="4" cellpadding="5">
+						<h:outputText value="Titre d'activité:" />
+						<p:inputText id="title" value="#{person.title}"  required="true" requiredMessage="Recherche impossible : Champ vide"/>
+						<h:commandButton action="#{person.findByTitle()}" value="Chercher"/>
+						<p:message for="title"/>
+					</h:panelGrid>
+					</p:panel>
+				</h:form>
+			</p:layoutUnit>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>
